@@ -79,7 +79,7 @@ export const Search = ({googleKey}:Props) => {//shows background of the main pag
           src={'/searchW.svg'} width={70} height={70} alt='search'/>
       </button>
   
-      <PlacesAutocomplete push={true} setPlace={setPlace}  style='input-search' hasContainer={false} listStyle='suggestionSitLoc' placeholder='Search Sitter location'
+      <PlacesAutocomplete push={true} place={place} setPlace={setPlace}  style='input-search' hasContainer={false} listStyle='suggestionSitLoc' placeholder='Search Sitter location'
           onAddressSelect={(address) => {
             getGeocode({ address: address }).then((results) => {
               const { lat, lng } = getLatLng(results[0]);

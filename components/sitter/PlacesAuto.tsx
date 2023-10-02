@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useRouter } from "next/navigation";
 
 import usePlacesAutocomplete, {
@@ -13,9 +13,10 @@ type Props={
   placeholder:string;
   hasContainer:boolean;
   listStyle?:string;
-  push:boolean
+  push:boolean,
+  place?:string
 }
-  export const PlacesAutocomplete = ({onAddressSelect,setPlace,style,placeholder,hasContainer,listStyle,push }: Props) => {//the list of places that is showed based on the placeholder in the search bar
+  export const PlacesAutocomplete = ({onAddressSelect,setPlace,style,placeholder,hasContainer,listStyle,push,place }: Props) => {//the list of places that is showed based on the placeholder in the search bar
     const {
       ready,
       value,
@@ -48,7 +49,7 @@ type Props={
               onAddressSelect && onAddressSelect(description);
 
                      setIsFocus(false)
-                     router.push(`/search`)   }}
+                       }}
           >
             <strong>{main_text}</strong> <small>{secondary_text}</small>
           </li>:<li
@@ -67,8 +68,12 @@ type Props={
         );
       });
     };
- 
-    return (
+    useEffect(()=>{
+      if(push&&place!==''){
+        router.push(`/searchL/${place}`)
+      }
+    },[place])
+return (
       hasContainer? <div className='autocompleteWrapper'>
       <input
         value={value}
