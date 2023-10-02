@@ -45,7 +45,7 @@ const Services = ({ servicesSitter,servicePriceD,servicePriceH }: Props) => {//t
 
   return (
     
-      showSkeleton?<Skeleton width='18rem' height='20rem' variant='rounded' style={{borderRadius:'10%',gap:'6rem'}}/>:
+      showSkeleton?<Skeleton width='18rem' height='20rem' variant='rounded' style={{borderRadius:'10%',gap:'6rem',paddingRight:'5rem'}}/>:
       <div className='sitterServicesC'>
       
         <h1 className='userH1 text-3xl text-center pt-2'>Services</h1>
