@@ -126,7 +126,7 @@ const ContactSi = ({session}:Props) => {//the contact form when the user wants t
           <Button
             title={submitting ? `Sending` : "Send"}
             type="submit"
-            leftIcon={submitting ? "" : "/email2.png "}
+            leftIcon={submitting ? "" : "/email2.svg"}
             submitting={submitting}
           />
     
