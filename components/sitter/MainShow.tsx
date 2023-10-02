@@ -23,7 +23,7 @@ const MainShow = ({desc,name,sitter,apikey}:Props) => {//the main page in sitter
 
   return (
 
-    <div className='flex-row flex pl-5 gap-[6rem] justify-center'>
+    <div className='flex-row flex pl-5 gap-[8rem] justify-center'>
       <SitterVa  sitter={sitter} name={name}/>
 
       {showSkeleton? 
