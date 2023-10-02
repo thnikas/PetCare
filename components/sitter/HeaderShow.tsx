@@ -29,7 +29,7 @@ const HeaderShow = ({name,img,locationM,firstRender,sitter,session}:Props) => {/
    
   }, []);
   return (
-    <div className='justify-center gap-[8rem]	flex pb-10  relative'>
+    <div className='justify-center gap-[10rem]	flex pb-10  relative'>
       {showSkeleton? 
         <Skeleton   width='200px' height='200px' variant="circular" className='h-[200px] w-[200px] rounded-[50%] ml-[7rem]' animation="wave"/>:img?    
         <Image src={img} alt={img} width={200} height={200} className=' z-[-2] h-[200px] w-[200px] rounded-[50%] ml-[7rem] relative '/>
