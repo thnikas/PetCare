@@ -52,6 +52,7 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlighteddays?: number[] 
       
       <PickersDay  
       className={isSelected?'bone':'bonedis'}
+      style={isSelected?{backgroundColor:"#6171A3"}:{backgroundColor:"white"}}
       sx={{
       color:isSelected?'white':'black',
       
@@ -115,7 +116,7 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlighteddays?: number[] 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}  >
       <h1 className='userH1 text-3xl text-center pt-4'>Availability</h1>
-      <DateCalendar className=' w-[18rem]'
+      <DateCalendar className=' w-[17.7rem]'
       readOnly={true}
       views={['day']}       
         defaultValue={initialValue}
