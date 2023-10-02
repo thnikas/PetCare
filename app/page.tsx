@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { ProjectInterface } from "@/common.types";
 import { Search } from '@/components/Search';
 import Loader from '@/components/Loader';
 import PetCareDetails from '@/components/PetCareDetails';
