@@ -52,12 +52,13 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlighteddays?: number[] 
       
       <PickersDay  
       className={isSelected?'bone':'bonedis'}
-      style={isSelected?{backgroundColor:"#6171A3"}:{backgroundColor:"white"}}
+      style={isSelected?{backgroundColor:"#6171A3",borderRadius:'10%'}:{}}
       sx={{
       color:isSelected?'white':'black',
       
         [`&&.${pickersDayClasses.selected}`]: {
           backgroundColor: "#6171A3",
+
         }
       }} {...props} {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
     </Badge>
