@@ -117,13 +117,13 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlighteddays?: number[] 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}  >
       <h1 className='userH1 text-3xl text-center pt-4'>Availability</h1>
-      <DateCalendar className=' w-[17.7rem]'
+      <DateCalendar className=' w-[283px]'
       readOnly={true}
       views={['day']}       
         defaultValue={initialValue}
         loading={isLoading}
         onMonthChange={handleMonthChange}
-        renderLoading={() => <DayCalendarSkeleton className=' w-[17.7rem]'/>}
+        renderLoading={() => <DayCalendarSkeleton className=' w-[283px]'/>}
         slots={{
           day: ServerDay,
         }}
