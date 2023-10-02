@@ -44,7 +44,7 @@ const SitterVa = ({sitter,name}:Props) => {
     <div>
         <Services servicesSitter={sitter?.service} servicePriceD={sitter?.moneyD} servicePriceH={sitter?.moneyH}/>
         <Types petTypes={sitter?.sizePets} name={name}/>
-        {array.length>0? <DatesAv  daysA={array}/>:<DayCalendarSkeleton style={{width:'17.7rem'}}/>}
+        {array.length>0&&sitter? <DatesAv  daysA={array}/>:<DayCalendarSkeleton style={{width:'17.7rem'}}/>}
        
     </div>
   )
