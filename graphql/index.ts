@@ -313,6 +313,56 @@ export const sitterQuery = `
     }
   }
 `;
+export const sitterQueryN = `
+  query getSitter($endcursor: String) {
+    sitterSearch(first: 8, after: $endcursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          service {
+            home
+            walk
+            drop
+          }
+          moneyH
+          moneyD
+          rating
+          review
+          daysA {
+            mon
+            tue
+            wed
+            thu
+            fri
+            sat
+            sun
+          }
+          locationM
+          mapRadius
+          sizePets {
+            small
+            medium
+            big
+            cat
+          }
+          id
+          createdBy {
+            email
+            name
+            id
+            avatarUrl
+            description
+          }
+        }
+      }
+    }
+  }
+`;
 export const getProjectByIdQuery = `
   query GetProjectById($id: ID!) {
     project(by: { id: $id }) {

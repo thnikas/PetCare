@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-import {  createUserMutation, deleteProjectMutation, updateProjectMutation, getProjectByIdQuery,getPetByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation } from "@/graphql";
+import {  createUserMutation, deleteProjectMutation, updateProjectMutation, getProjectByIdQuery,getPetByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation, sitterQueryN } from "@/graphql";
 import { PetForm, PetFormState,SitterServices, SitterServicesForm, UserForm } from "@/common.types";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -55,6 +55,11 @@ export const fetchAllSitters = (locationM?: string | undefined, endcursor?: stri
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(sitterQuery, { locationM, endcursor });
+};
+export const fetchAllSittersN = (endcursor?: string | null) => {
+  client.setHeader("x-api-key", apiKey);
+
+  return makeGraphQLRequest(sitterQueryN, { endcursor });
 };
 export const fetchAllUsers=(id?:string | null, endcursor?: string | null)=>{
   client.setHeader("x-api-key", apiKey);
