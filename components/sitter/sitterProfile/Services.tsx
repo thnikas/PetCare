@@ -15,7 +15,7 @@ const servicesList = [
   { title: 'Drop in Visits', name: 'drop', icon: '/house.svg' },
 ];
 
-const Services = ({ servicesSitter,servicePriceD,servicePriceH }: Props) => {//the services of the sitter
+const Services = ({ servicesSitter,servicePriceD,servicePriceH }: Props) => {//the services
   const [checkServices, setCheckServices] = useState<string[]>([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
   useEffect(() => {
@@ -45,7 +45,7 @@ const Services = ({ servicesSitter,servicePriceD,servicePriceH }: Props) => {//t
 
   return (
     
-      showSkeleton?<Skeleton width='18rem' height='20rem' variant='rounded' style={{borderRadius:'10%',paddingLeft:10}}/>:
+      showSkeleton?<Skeleton width='18rem' height='20rem' variant='rounded' style={{borderRadius:'10%',gap:'3rem'}}/>:
       <div className='sitterServicesC'>
       
         <h1 className='userH1 text-3xl text-center pt-2'>Services</h1>
