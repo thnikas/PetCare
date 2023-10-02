@@ -51,7 +51,7 @@ export const fetchAllPets = (type?: string | null, endcursor?: string | null) =>
 
   return makeGraphQLRequest(petsQuery, { type, endcursor });
 };
-export const fetchAllSitters = (locationM?: string | null, endcursor?: string | null) => {
+export const fetchAllSitters = (locationM?: string | undefined, endcursor?: string | null) => {
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(sitterQuery, { locationM, endcursor });

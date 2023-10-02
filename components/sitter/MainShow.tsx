@@ -32,7 +32,7 @@ const MainShow = ({desc,name,sitter,apikey}:Props) => {//the main page in sitter
         <Skeleton height={300} width={500} className='w-[500px]  h-[300px]'/></div>  :<div className='gap-4 flex-col flex '>
         <div className='userH1 text-xl font-bold w-[500px]'>About {name}</div>
         <div className='w-[500px] userH4'>{desc}</div>
-        {/* <LocationSi sitter={sitter} name={name} apikey={apikey}/> */}
+        <LocationSi sitter={sitter} name={name} apikey={apikey}/>
       </div>}
 
     </div>
