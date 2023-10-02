@@ -123,7 +123,7 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlighteddays?: number[] 
         defaultValue={initialValue}
         loading={isLoading}
         onMonthChange={handleMonthChange}
-        renderLoading={() => <DayCalendarSkeleton />}
+        renderLoading={() => <DayCalendarSkeleton className=' w-[17.7rem]'/>}
         slots={{
           day: ServerDay,
         }}
