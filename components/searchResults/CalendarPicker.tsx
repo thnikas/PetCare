@@ -67,10 +67,10 @@ export default function CalendarPicker({title,setDates,dates,iconWidth,fontSize,
         day:CustomDay               
         }}
         slotProps={{ textField: { 
-        sx:{color:'#6171A3',borderColor:'red',width:widthD?widthD:'7.8rem',}, 
+        sx:{color:'#6171A3',borderColor:'red',width:widthD?widthD:undefined,},className:'calendarWidth' ,
         size:widthD?"medium":"small", color:"primary",
-        InputLabelProps:{style:{fontSize:fontSize?fontSize:12,fontFamily:'Inter'}},
-        inputProps:{style:{fontSize:fontSize?fontSize:11.5,fontFamily:'Inter'}}}, 
+        InputLabelProps:{style:{fontSize:fontSize?fontSize:undefined},className:'calendarText'},
+        inputProps:{style:{fontSize:fontSize?fontSize:undefined},className:'calendarText'}}, 
         openPickerButton:{sx:{color:'#6171A3',width:iconWidth?iconWidth:24, justifyContent:'center', }},}}
         />
       </ThemeProvider>

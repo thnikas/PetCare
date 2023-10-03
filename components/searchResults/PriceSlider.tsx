@@ -26,7 +26,7 @@ export default function PriceSlider({money,setMoney}:Props) {//the slider where 
   
   return (
     <Box sx={{ width: 255,gap:3 }}>
-      <h2>Price range</h2>
+      <h2 className='textTitleSS'>Price range</h2>
     
       
       <Slider

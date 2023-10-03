@@ -12,8 +12,8 @@ const PetTypesSearch = ({sizePets,setSizePets}:Props) => {//the pet type compone
  
   return (
     <div className='pb-12 gap-6 grid'>
-      <h2 className='h2'>Pet types</h2>
-      <PetTypes textStyle='text-lg pl-2'  iconsSize={40} values={sizePets} setState={setSizePets}/>
+      <h2 className='h2 textTitleSS'>Pet types</h2>
+      <PetTypes textStyle='text-lg pl-2 typesText'  iconsSize={40} values={sizePets} setState={setSizePets}/>
     </div>
   )
 }

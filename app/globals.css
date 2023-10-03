@@ -71,8 +71,8 @@ body {
 
 /* Home */
 .projects-grid {
-  @apply  gap-10 mt-2 w-full;
-  padding-top: 30rem
+  @apply  gap-10 mt-2 w-full   ;
+  /* padding-top: 30rem */
 }
 
 /* Project Actions */
@@ -264,7 +264,7 @@ body {
 }
 
 .bg_image{
- top:16%
+ position: relative;
 }
 /*Edit Profile*/
 .h2-sitterEdit{
@@ -358,7 +358,7 @@ font-size: 36px;
   filter: brightness(90%);
 }
 .sitters-details {
-  padding-top: 41rem
+  padding-top: 11rem
 }
 .h1-sitter{
   font-size: 36px;
@@ -511,7 +511,7 @@ input.checked::before {
 .search-box{
   width: fit-content;
   height: fit-content;
-  position: relative;
+  
   
 }
 .input-search{
@@ -601,7 +601,8 @@ input.checked::before {
 /*Search*/
 .imageUser{
   border-radius: 20px 0px 20px 20px;
-  
+  width: 11.5rem;
+  height:11.9rem;
   left: -1px;
 }
 .userH1{
@@ -1143,6 +1144,26 @@ font-weight: 700;
 line-height: normal;
 letter-spacing: 2.5px;
 }
+@media (max-width: 768px) {
+  .bg_text {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+}
+
+/* Responsive styles for even smaller screens */
+@media (max-width: 480px) {
+  .bg_text {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+}
+@media (min-width: 1500px) {
+  .bg_text {
+    font-size: 50px; /* Adjust font size for larger screens */
+    letter-spacing: 4px; /* Adjust letter spacing for larger screens */
+  }
+}
 /*cards homeScreen */
 .containerCard {
   display: inline-flex;
@@ -1298,8 +1319,13 @@ letter-spacing: 2.5px;
   cursor: pointer;
 }
 /*user profile sitter*/
+.containerProfile{
+  width: 37.5rem;
+  height: 12rem;
+}
 .containerProfile:hover{
   cursor: pointer;
+
 }
 .h1-sitterShow{
   font-size: 36px;
@@ -1615,3 +1641,104 @@ padding-right: 1rem;
   padding: 20px;
   font-size: 22px;
 }
+.image-containerNe{
+
+  width: 100%;
+
+  > div {
+    position: unset !important;
+  }
+
+  .imageNe {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+}
+.resFont{
+  font-size:1.1vw;
+}
+@media (max-width: 768px) {
+  .resFont{
+    font-size: 1vw;
+    
+  }
+}
+.image-container2 {
+  max-width: 100vw; /* Ensure the container doesn't exceed its parent's width */
+  height: auto;   /* Automatically adjust the height to maintain aspect ratio */
+  text-align: center; /* Center the image horizontally within the container */
+}
+
+.responsive-image2 {
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  height: auto;    /* Automatically adjust the height to maintain aspect ratio */
+}
+
+.textTitleSS{
+  font-size: 18px;
+}
+.textSS{
+  font-size: 15px;
+}
+.typesCont{
+  width: 18rem;
+}
+.calendarText{
+  font-size:12px;
+  font-family:'Inter';
+}
+.calendarWidth{
+  width: 7.8rem;
+}
+.typesText{
+  font-size: 1.125rem
+}
+@media (min-width: 1500px) {
+  .textTitleSS{
+    font-size: 26px;    
+  }
+  .textSS{
+    font-size: 20px;
+  }
+  .typesCont{
+    width: 23rem;
+    height: 4rem;
+  }
+  .calendarText{
+    font-size:19px;
+    font-family:'Inter';
+    height: 2rem;
+  }
+  .calendarWidth{
+    width: 10.8rem;
+  }
+  .typesText{
+    font-size: 1.525rem
+  }
+  .buttonS{
+     
+      padding: 18px 25px;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+      font-size: 25px;
+      font-weight: 600;
+  }
+  .containerProfile{
+    width: 43.5rem;
+    height: 13rem;
+  }
+  .imageUser{
+    border-radius: 20px 0px 20px 20px;
+    width: 13.5rem;
+    height:12.9rem;
+    left: -1px;
+  }
+  .userPrice{
+    font-size:24px ;
+    padding-left: 12%;
+  }
+}
+

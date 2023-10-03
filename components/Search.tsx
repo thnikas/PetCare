@@ -41,42 +41,49 @@ export const Search = ({googleKey}:Props) => {//shows background of the main pag
   if (!isLoaded) {
     return  (
     
-       <Image
-        style={{top:'13%'}}
-        src="/bgn3.jpg"
-        alt="Background Image"
-        layout="fill"
-        objectFit="cover"
-        className='bg_image'
-        />
+      <Image
+    src="/bgn3.jpg"
+    alt="Background Image"
+    width={0}
+  height={0}
+  objectFit='cover'
+   sizes="
+              100vw"
+        style={{ height: '50vw', width: '100vw' }} //The point is right there!
+  />
     )
    
   }
   return (
     <div>
       <div className='bg_image'>
-        <Image
-        style={{top:'13%'}}
-        src="/bgn3.jpg"
-        alt="Background Image"
-        layout="fill"
-        objectFit="cover"
-        className='bg_image'
-        />
-      <div style={{top:100}} className={sand.className}>
-        <div style={{ width: '20.4%', left: '62.9%', top: '85.875%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>Search all</div>
-        <div style={{ width: '18.1%', left: '81.5%', top: '102.875%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>the world</div>
-        <div style={{ width: '19%', left: '76.9%', top: '95%', position: 'absolute', color: '#6171A3' }} className='bg_text'>around</div>
-        <div style={{ width: '40.5%', left: '0.9%', top: '14.75%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>Find Pet Sitters</div>
-        <div style={{ width: '32.6%', left: '27.5%', top: '28.625%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>become one</div>
-        <div style={{ width: '5.8%', left: '27%', top: '21.125%', position: 'absolute', color: '#6171A3' }} className='bg_text'>or</div>
+      <div>
+      <Image
+    src="/bgn3.jpg"
+    alt="Background Image"
+    width={0}
+  height={0}
+   sizes="
+              100vw"
+        style={{ height: '50vw', width: '100vw' }} //The point is right there!
+  />
       </div>
-    </div>
-
-    <div className="search-box pt-64">
+ 
+  
+     <div style={{ top: '10%', }} className={sand.className}>
+  <div style={{ width: '20.4%', left: '62.9%', top: '72.875%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>Search all</div>
+  <div style={{ width: '18.1%', left: '81.5%', top: '89.875%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>the world</div>
+  <div style={{ width: '19%', left: '76.9%', top: '82%', position: 'absolute', color: '#6171A3' }} className='bg_text'>around</div>
+  <div style={{ width: '40.5%', left: '0.9%', top: '6.75%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>Find Pet Sitters</div>
+  <div style={{ width: '32.6%', left: '27.5%', top: '20.625%', position: 'absolute', color: '#FFFEFE' }} className='bg_text'>become one</div>
+  <div style={{ width: '5.8%', left: '27%', top: '13.125%', position: 'absolute', color: '#6171A3' }} className='bg_text'>or</div>
+  
+</div>
+<div className='w-full absolute justify-center flex top-[50%] h-fit'>
+<div className="search-box absolute top-[50%] ">
       <button className="btn-search" >
         <Image    //search button that is shows the list of the places based on the placeholder
-          src={'/searchW.svg'} width={70} height={70} alt='search'/>
+          src={'/searchW.svg'} width={170} height={170} alt='search'/>
       </button>
   
       <PlacesAutocomplete push={true} place={place} setPlace={setPlace}  style='input-search' hasContainer={false} listStyle='suggestionSitLoc' placeholder='Search Sitter location'
@@ -89,6 +96,11 @@ export const Search = ({googleKey}:Props) => {//shows background of the main pag
           }}
       />
     </div>
+  </div>
+
+    </div>
+    
+    
   </div>
   )
 }

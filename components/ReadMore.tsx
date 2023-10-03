@@ -21,8 +21,9 @@ export const ReadMore = ({ children,size,setSize }: Props) => {
     }
     
  },[isReadMore])
-    const toggleReadMore = () => {
-        
+    const toggleReadMore = (e:any) => {
+      e.preventDefault();
+      e.stopPropagation();
       setIsReadMore(!isReadMore);
      
     };
@@ -31,7 +32,7 @@ export const ReadMore = ({ children,size,setSize }: Props) => {
         {isReadMore ?   
         text?text.slice(0, 130):null
          : text}
-        <span onClick={toggleReadMore} className="read-or-hide">
+        <span onClick={(e)=>toggleReadMore(e)} className="read-or-hide">
           {isReadMore ? "...read more" : " show less"}
         </span>
       </p>

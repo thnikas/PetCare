@@ -11,21 +11,22 @@ const Sitter = async() => {//the sitter page that motivates the user to become a
   const session = await getCurrentUser();
   const sitterExist=session?await  getUserSitter(session.user.id, 100) as { user: UserProfile }:null
   return (
-    <section className='flexStart flex-col paddings mb-16'>
+    <section className='flexStart flex-col  mb-16'>
       <div>
         <Image //the page background image
-      style={{top:'13%'}}
-        src="/bg33.jpg"
+        src="/bg334.jpg"
         alt="Background Image"
-        layout="fill"
-        objectFit="cover"
-        className='bg_image'
+        width={500}
+  height={500}
+   sizes="
+              100vw"
+        style={{ height: '100%', width: '100vw' }} //The point is right there!
       />
           
       {/**the button that redirects the user to the sitter creation  */}
         <ButtonStr title='Get Started' session={session} sitter={sitterExist?.user.sitter.edges}/>
       </div>
-      <section className="sitters-details">{/**the page objects that are showed under the image */}
+      <section className="sitters-details paddings">{/**the page objects that are showed under the image */}
         <SittersDetails session={session} sitter={sitterExist?.user.sitter.edges}/>
       </section>
     </section> 

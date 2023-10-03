@@ -32,14 +32,14 @@ export default function ListService({service,setState,fontSize,iconSize}:Props) 
     }
   }, [selected]);
   return (
-    <div className="top-16 w-72 cursor-pointer">
+    <div className="top-16 typesCont cursor-pointer">
       <Listbox value={selected} onChange={setSelected} > {/**changes the selected values */}
         <div className="relative mt-1">
           <Listbox.Button className="cursor-pointer relative w-full  rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <div className='flex items-center gap-4 cursor-pointer'>
+            <div className='flex items-center gap-4 cursor-pointer typesCont'>
               <Image src={selected.icon} width={iconSize?iconSize:35} height={iconSize?iconSize:35}  alt='dog-sign'/>
 
-              <span style={{fontSize:fontSize}}  className="block truncate">{selected.title}</span>
+              <span style={{fontSize:fontSize}}  className="block truncate textSS">{selected.title}</span>
             </div>
             
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -77,7 +77,7 @@ export default function ListService({service,setState,fontSize,iconSize}:Props) 
                         <div className='flex items-center gap-4 '>
                           <Image src={service.icon} width={iconSize?iconSize:35} height={iconSize?iconSize:35} alt='dog-sign'/>
 
-                          <span className="block truncate">{service.title}</span>
+                          <span className="block truncate textSS">{service.title}</span>
                         </div>
                       </span>
                       {selected ? (

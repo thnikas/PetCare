@@ -15,7 +15,7 @@ const RangePicker = ({dates,setDates,iconWidth,fontSize,width}:Props) => {//the 
 
   return (
     <div >
-          <h2>Dates</h2>
+          <h2 className='textTitleSS'>Dates</h2>
         <div className='flex gap-2 pt-4'>
         <CalendarPicker iconWidth={iconWidth} fontSize={fontSize} widthD={width} dates={dates}  setDates={setDates} title='Start date'/>
         <h2 className='flex justify-center flex-col'>-</h2>

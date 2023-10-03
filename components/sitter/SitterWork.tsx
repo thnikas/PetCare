@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const SitterWork = () => {//another part of the main sitter page
   return (
-    <div className="w-[1157px] h-72 justify-center items-center gap-[46px] inline-flex pt-24 ">
+    <div className="w-[100%] h-72 justify-center items-center gap-[46px] inline-flex pt-24 ">
     <div className="w-[356px] h-[276px] flex-col justify-center items-center gap-[15px] inline-flex">
         <div className="w-[68px] h-[68px] relative">
             <Image src={'/user.svg'} width={68} height={68} alt='user'/>

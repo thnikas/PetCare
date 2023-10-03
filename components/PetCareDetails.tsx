@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import ButtonStr from './sitter/ButtonStr';
 import Button from './Button';
 
 const PetCareDetails = () => {//the com is showed under the background in home page
@@ -10,9 +9,10 @@ const PetCareDetails = () => {//the com is showed under the background in home p
 
   return (
     <div >
-      <div className='justify-center flex w-[88vw]'>
+      <div className='justify-center flex w-[88vw] pt-24 '>
       <div className="containerCard">
-        <Image className="w-[500px] h-[337px] rounded-[10px]" src={'/bg4.jpg'} alt='bg4' width={500} height={337}/>
+        <Image className="lg:w-[31.25rem] h-[21.063rem] rounded-[10px]" src={'/bg4.jpg'} alt='bg4' width={500} height={337}/>
+        {/* className='lg:w-[7.4rem] md:w-[6rem] sm:w-[5rem] w-[4rem] xl:w-[8.2rem]' */}
         <div className="content-container">
           <div className="title pageC">Discover compassionate Pet Sitters</div>
           <div className="description h3-sitter">Uncover vetted and highly-rated pet sitters who provide unwavering companionship to your pets, ensuring utmost care, time, and affection.</div>

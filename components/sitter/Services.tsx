@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 export const Services = () => {//the page that is shoed in the main sitter page
   return (
-    <div className="w-[1199px] h-[543px] justify-center items-center gap-[43px] inline-flex pt-52 ">
+    <div className="w-[100%] h-[543px] justify-center items-center gap-[43px] inline-flex pt-52 ">
     <div className="h-[533px] flex-col justify-center items-center gap-[78px] inline-flex">
       <div className="flex-col justify-start items-start gap-[67px] flex">
         <div className="w-[388px] text-center text-gray-700 text-[32px] font-extrabold h2-sitter">Services</div>

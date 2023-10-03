@@ -4,6 +4,7 @@ import { getProviders, signIn } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 
 import Button from './Button';
+import ButtonSi from './ButtonSi';
 
 type Provider = {
     id: string;
@@ -34,7 +35,7 @@ const AuthProviders = () => {//is a button that is showed when the user in not l
         return (
             <div>
                 {Object.values(providers).map((provider: Provider, i) => (
-                    <Button key={i} title='Sign In' handleClick={() => signIn(provider?.id)} />
+                    <ButtonSi key={i} title='Sign In' handleClick={() => signIn(provider?.id)} />
                 ))}
             </div>
         )

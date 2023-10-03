@@ -16,10 +16,10 @@ const Home = async({ searchParams: { category, endcursor } }: Props,) => {
   const googleApiKey = process.env.GOOGLE_MAPS_KEY
 
   return (
-    <section className='flexStart flex-col paddings mb-16'>
+    <section className='flexStart flex-col mb-16'>
         <Search googleKey={googleApiKey}/>{/**the backgrouund image with the search icon */}
         <Loader/>{/**the loader that is showed when the value is true */}
-        <section className="projects-grid ">
+        <section className="projects-grid paddings">
           <PetCareDetails/>{/**the main page under the background image */}
       </section>
     </section>

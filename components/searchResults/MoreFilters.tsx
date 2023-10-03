@@ -13,7 +13,7 @@ const MoreFilters = ({service,setState}:Props) => {//the service filter in the s
 
   return (
     <div className='pt-8 relative'>
-      <h2>Services</h2>
+      <h2 className='textTitleSS'>Services</h2>
       <ListService service={service} setState={setState}/>
     </div>
   )
