@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { Suspense } from "react";
 import { ContextCr } from "./context/contextCr"
 import Loader from "./loading";
+
 export const metadata = {
   title: 'PetCare',
   description: 'Find where to leave your pet',

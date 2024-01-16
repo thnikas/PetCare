@@ -1,7 +1,15 @@
-import { g, config, auth } from '@grafbase/sdk';
+import { g, config, auth,connector } from '@grafbase/sdk';
 
 //the fields that each model will have in the grafbase
 // @ts-ignore
+const mongo = connector.MongoDB('MongoDB', {
+  url: g.env('MONGODB_API_URL'),
+  apiKey: g.env('MONGODB_API_KEY'),
+  dataSource: g.env('MONGODB_DATASOURCE'),
+  database: g.env('MONGODB_DATABASE'),
+})
+
+g.datasource(mongo)
 const User = g.model('User', {
   name: g.string().length({ min: 2, max: 100 }),
   email: g.string().unique(),
@@ -92,3 +100,6 @@ export default config({
     providers: [jwt],
     rules: (rules) => rules.public()  },
 })
+
+
+

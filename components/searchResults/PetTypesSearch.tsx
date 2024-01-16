@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import PetTypes from '../sitter/PetTypes'
-import { SitterServicesFormState } from '@/common.types';
 
 type Props={
   sizePets:{small:boolean,medium:boolean,big:boolean,cat:boolean},

@@ -5,7 +5,6 @@ import RangePicker from './RangePicker'
 import PriceSlider from './PriceSlider'
 import PetTypesSearch from './PetTypesSearch'
 import FilterButton from './FilterButton'
-import { SitterServicesFormState } from '@/common.types'
 
 type Props={
   sitterData:any,

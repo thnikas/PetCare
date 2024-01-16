@@ -27,6 +27,7 @@
     "deep-equal": "^2.2.2",
     "encoding": "^0.1.13",
     "framer-motion": "^10.16.4",
+    "grafbase": "^0.47.0",
     "graphql-request": "^6.1.0",
     "gsap": "^3.12.2",
     "jsonwebtoken": "^9.0.1",
@@ -46,6 +47,6 @@
     "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
-    "@grafbase/sdk": "^0.1.1"
+    "@grafbase/sdk": "^0.12.0"
   }
 }

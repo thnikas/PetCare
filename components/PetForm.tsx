@@ -18,7 +18,7 @@ type Props = {
     petCr?:PetInterface
 }
 
-const PetForm = ({ type, session, project,petCr }: Props) => {//the form that the user can create or edit the Pet
+const PetForm = ({ type, session, petCr }: Props) => {//the form that the user can create or edit the Pet
     const router = useRouter()
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [form, setForm] = useState<PetFormState>({
