@@ -1,20 +1,23 @@
 'use client'
 
 import { SessionInterface, SitterServices, UserProfile } from '@/common.types'
-import { getSitterDetails, getUserSitter } from '@/lib/actions'
+import { getSitterDetails, getUserById, getUserSitter } from '@/lib/actions'
 import React, { useEffect, useState } from 'react'
 import HeaderShow from './HeaderShow'
 import MainShow from './MainShow'
 import HeaderStick from './sitterProfile/HeaderStick'
 import { AnimatePresence, motion } from 'framer-motion';
+import { useGlobalContext } from '@/app/context'
 
 type Props={
     id:string,
     apikey:string|undefined,
-    session:SessionInterface;
+    session?:SessionInterface;
 }
 
-const SitterShow = ({id,apikey,session}:Props) => {
+const SitterShow = ({id,apikey}:Props) => {
+  const {logUser} = useGlobalContext()
+  const session = logUser?.mongoDB
     
     const [img,setImg]=useState<string|undefined>()
     const [name,setName]=useState<string|undefined>()
@@ -29,12 +32,13 @@ const SitterShow = ({id,apikey,session}:Props) => {
       };
     const getUser=async()=>{
        const finalSitter=await getSitterDetails(id) as{sitter:SitterServices}//check if the user is sitter
-        const sitter=await getUserSitter(finalSitter.sitter.createdBy.id, 100) as { user: UserProfile }
-        setSitterUser(finalSitter.sitter)
-        setLocationM(finalSitter.sitter.locationM)
-        setImg(sitter.user.avatarUrl)
-        setName(sitter.user.name)
-        setDesc(sitter.user.description)
+        const sitter=await getUserById(finalSitter.mongoDB.sitter.createdBy) as { user: UserProfile }
+        console.log(sitter)
+        setSitterUser(finalSitter.mongoDB.sitter)
+        setLocationM(finalSitter.mongoDB.sitter.locationM)
+        setImg(sitter.mongoDB.user.avatarUrl)
+        setName(sitter.mongoDB.user.name)
+        setDesc(sitter.mongoDB.user.description)
         setFirstRender(false)
         }
         useEffect(()=>{

@@ -10,19 +10,19 @@ import { signOut } from "next-auth/react";
 import { useGlobalContext } from '@/app/context'
 
 type Props={
-    user:any
+    userD?:any
 }
-const ProfileEdit = ({user}:Props) => {//when the user is logged in and want to change his profile
+const ProfileEdit = ({userD}:Props) => {//when the user is logged in and want to change his profile
+    const { setLoader, logUser, setLogUser} = useGlobalContext();
+    const user = logUser?.mongoDB?.user
     const router = useRouter()
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [isDeleting, setIsDeleting] = useState<boolean>(false)
-    const { setLoader} = useGlobalContext();
-
     const [form, setForm] = useState<UserForm>({
-        name:user.name,
-        email: user.email,
-        avatarUrl:user.avatarUrl,
-        description:user.description,
+        name:user?.name,
+        email: user?.email,
+        avatarUrl:user?.avatarUrl,
+        description:user?.description,
     })
     const handleStateChange = (fieldName: keyof UserForm, value: string) => {//when something changes in the form
         setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
@@ -60,7 +60,7 @@ const ProfileEdit = ({user}:Props) => {//when the user is logged in and want to 
         try {
             
 
-                await updateUser(form, user?.id as string, token)
+                await updateUser(form, user?.id as string)
 
                 router.push("/")
                 router.refresh()
@@ -82,7 +82,9 @@ const ProfileEdit = ({user}:Props) => {//when the user is logged in and want to 
             signOut({
                 callbackUrl: `${window.location.origin}`
               })
-            await deleteUser(user.id, token);
+              setLogUser(null)
+
+            await deleteUser(user.id);
             
             router.push("/");
         } catch (error) {
@@ -96,7 +98,7 @@ const ProfileEdit = ({user}:Props) => {//when the user is logged in and want to 
     className="flexStart form">
         <div className="flexStart form_image-container">
                 <label htmlFor="poster" className="flexCenter form_image-label">
-                    {!form.avatarUrl && 'Choose a poster for your project'}
+                    {!form.avatarUrl && 'Choose a photo for your profile'}
                 </label>
                 <input
                     id="image"
@@ -116,7 +118,7 @@ const ProfileEdit = ({user}:Props) => {//when the user is logged in and want to 
             <FormField
                 title="Your Name"
                 state={form.name}
-                placeholder="Flexibble"
+                placeholder="Soger"
                 setState={(value) => handleStateChange('name', value)}
             />
 

@@ -2,7 +2,7 @@
 import { SitterServices, UserProfile } from '@/common.types'
 import React,{useState} from 'react'
 import Rating from '@mui/material/Rating';
-import { getUserSitter } from '@/lib/actions';
+import { getUserById, getUserSitter } from '@/lib/actions';
 import { ReadMore } from '../ReadMore';
 import { redirect } from "next/navigation";
 import Link from 'next/link';
@@ -27,12 +27,12 @@ const List = ({data,sitterData}:Props) => {//list of the user cards that is show
   }
 
   const getUser=async()=>{
-  const sitter=await getUserSitter(data.createdBy.id, 100) as { user: UserProfile }
-  setImg(sitter.user.avatarUrl)
-  setName(sitter.user.name)
-  setDesc(sitter.user.description)
+  const sitter=await getUserById(data.createdBy) as { user: UserProfile }
+  setImg(sitter.mongoDB.user.avatarUrl)
+  setName(sitter.mongoDB.user.name)
+  setDesc(sitter.mongoDB.user.description)
   }
-  getUser()
+getUser()
   return (
     <div className='justify-center flex pt-8 '  >
       

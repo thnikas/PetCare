@@ -59,7 +59,9 @@ body {
 .no-result-text {
   @apply w-full text-center my-10 px-2;
 }
-
+.SignInB{
+ @apply w-[30rem]
+}
 /* Project Details */
 .user-actions_section {
   @apply fixed max-md:hidden flex gap-4 flex-col right-10 top-20;

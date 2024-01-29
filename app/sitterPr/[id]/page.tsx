@@ -11,10 +11,10 @@ type Props = {
 
 const page = async({ params }: Props) => {//the sitter profil of every user
   const googleApiKey = process.env.GOOGLE_MAPS_KEY
-  const session = await getCurrentUser();
+  // const session = await getCurrentUser();
 
   return (
-    <SitterShow session={session} id={params.id} apikey={googleApiKey}/>
+    <SitterShow  id={params.id} apikey={googleApiKey}/>
   )
 }
 

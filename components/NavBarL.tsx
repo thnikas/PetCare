@@ -37,7 +37,7 @@ const NavBarL = ({session}:any) => {
       </div>
 
       <div className='flexCenter gap-4'>
-        {session?.user ? (//if user is logged in show the profileMenu or else the Sign in Button
+        {session?.mongoDB.user ? (//if user is logged in show the profileMenu or else the Sign in Button
           <>
             <ProfileMenu session={session} />
 

@@ -29,9 +29,9 @@ const Search = async({
     searchParams: { locationM, endcursor },
     params: { id },
   }: Props) => {//the page is showed when the user enters a location in the search bar
-  const data =id? await fetchAllSitters(id, endcursor) as SitterSearch :await fetchAllSittersN(endcursor) as SitterSearch//get all the sitters that have the searched location
-
-    const sittersToDisplay = data?.sitterSearch?.edges || [];
+  const data =id? await fetchAllSitters(id) as SitterSearch :await fetchAllSittersN(endcursor) as SitterSearch//get all the sitters that have the searched location
+    console.log(data.mongoDB.sitterCollection?.edges)
+    const sittersToDisplay = data?.mongoDB.sitterCollection?.edges || [];
     {/**the component accepts 2 times the same array because the firstArray is used so it can be accepted all the filters that can be applied in the search form */}
   return (
     <SearchForm sittersArray={sittersToDisplay} firstArray={sittersToDisplay}/>

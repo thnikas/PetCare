@@ -22,7 +22,7 @@ const PetActions = ({ petId }: Props) => {//icons that is showed in pet View whe
         const { token } = await fetchToken();
 
         try {
-            await deletePet(petId, token);
+            await deletePet(petId);
             
             router.push("/");
             router.refresh()

@@ -32,6 +32,7 @@ export type PetFormState={
   energy:string;
   else:string;
   image: string;
+  createdBy:string
 }
 export interface SitterServicesForm {
   service: ServiceTypes;
@@ -43,6 +44,7 @@ export interface SitterServicesForm {
   sizePets:ServicePetSize;
   rating:number;
   review:number
+  createdBy: string
 
 }
 export type SitterServicesFormState={
@@ -55,26 +57,27 @@ export type SitterServicesFormState={
   sizePets:ServicePetSize;
   review:number;
   rating:number;
-  
+  createdBy: string
+
 }
+
 export type SitterServices={
-  service: ServiceTypes;
-  moneyH:number;
-  moneyD:number;
-  daysA:ServiceDays;
-  locationM:string;
-  mapRadius:number;
-  sizePets:ServicePetSize;
-  review:number;
-  rating:number
-  id: string;
-  createdBy: {
-    name: string;
-    email: string;
-    avatarUrl: string;
+  sitter:{
+    service: ServiceTypes;
+    moneyH:number;
+    moneyD:number;
+    daysA:ServiceDays;
+    locationM:string;
+    mapRadius:number;
+    sizePets:ServicePetSize;
+    review:number;
+    rating:number
     id: string;
-    description:string
-  };
+    createdBy: string
+  }
+   
+  
+  
 }
 export type ServiceTypes={
   home:boolean;
@@ -172,15 +175,23 @@ export interface UserProfile {
 }
 
 export interface SessionInterface extends Session {
+ mongoDB:{
   user: User & {
     id: string;
     name: string;
     email: string;
     avatarUrl: string;
-    
+    passwordHash:string
   };
+ }
+  
 }
-
+export interface UserForm{
+  name: string;
+    email: string;
+    avatarUrl: string;
+    passwordHash:string
+}
 export interface ProjectForm {
   title: string;
   description: string;
@@ -195,6 +206,7 @@ export interface UserForm{
   email: string;
   avatarUrl:string;
   description:string;
+  passwordHash:string
 }
 
 export interface FilterSitters{

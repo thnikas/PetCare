@@ -5,14 +5,14 @@ import { getCurrentUser } from '@/lib/session'
 import React from 'react'
 
 const page =  async ({ params: { id } }: { params: { id: string } })  => {//the page to contact a sitter
-  const session = await getCurrentUser();
+  // const session = await getCurrentUser();
 
   return (
     <Modal goBack={true}>
       
       <h3 className="modal-head-text">Contact Sitter</h3>
       
-      <ContactSi session={session}/>
+      <ContactSi/>
     </Modal>
   )
 }

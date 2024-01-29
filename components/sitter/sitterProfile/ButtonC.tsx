@@ -8,7 +8,7 @@ type Props={
 
 const ButtonC = ({customClass,idSitter}:Props) => {//the button to the user profile that redirects to the contact form
   const router = useRouter();
-
+  console.log(idSitter)
     
   return (
         customClass?

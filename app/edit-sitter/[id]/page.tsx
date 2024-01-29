@@ -7,12 +7,11 @@ import { redirect } from "next/navigation";
 
 const EditSitter = async ({params:{id}}:{params:{id:string}}) => {//edit sitter profile
     const googleApiKey = process.env.GOOGLE_MAPS_KEY
-    const session = await getCurrentUser();
-    if (!session?.user) redirect("/")
-    const result=await getSitterDetails(id) as {sitter?:SitterServices}
+    
+    const result=await getSitterDetails(id) as {mongoDB?:SitterServices}
     return (
       <div>
-         <SitterForm session={session} type='edit' mapsKey={googleApiKey} sitterD={result.sitter}/>
+         <SitterForm sitterId={id} type='edit' mapsKey={googleApiKey} sitterD={result.mongoDB}/>
       </div>
     )
 };

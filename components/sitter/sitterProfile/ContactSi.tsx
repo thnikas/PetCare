@@ -8,14 +8,18 @@ import Button from '@/components/Button';
 import ListService from '@/components/searchResults/ListService';
 import RangePicker from '@/components/searchResults/RangePicker';
 import DialogC from '@/components/DialogC';
+import { useGlobalContext } from '@/app/context';
 
 type Props={
-  session: SessionInterface,
+  session?: SessionInterface,
 
 }
-const ContactSi = ({session}:Props) => {//the contact form when the user wants to contect the sitter
+const ContactSi = () => {//the contact form when the user wants to contect the sitter
+    const {logUser} = useGlobalContext()
+    const session = logUser
     const [submitting, setSubmitting] = useState<boolean>(false);
-    const [form, setForm]=useState({name:'',email:session?session.user.email:'',message:'',phone:'',service:{home:false,walk:false,drop:false},
+    console.log(session?.mongoDB.user)
+    const [form, setForm]=useState({name:'',email:session?session.mongoDB.user.email:'',message:'',phone:'',service:{home:false,walk:false,drop:false},
     dates:{
       dateA:(new Date()),
       dateB:(new Date()) , 
@@ -49,7 +53,7 @@ const ContactSi = ({session}:Props) => {//the contact form when the user wants t
             {
               from_name: form.name,
               to_name: "Thomas",
-              from_email: session.user.email,
+              from_email: session.mongoDB.user.email,
               to_email: "thomasnika97@gmail.com",
               message: form.message,
               dates:form.dates,
@@ -67,7 +71,7 @@ const ContactSi = ({session}:Props) => {//the contact form when the user wants t
               }
               setForm({
                 name: form.name,
-                email: session.user.email,
+                email: session.mongoDB.user.email,
                 message: form.message,
                 service:form.service,
                 phone:form.phone,

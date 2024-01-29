@@ -9,14 +9,18 @@ import PetTypes from './PetTypes';
 import {  createNewSitter, fetchToken, updateSitter } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import Button from '../Button';
+import { useGlobalContext } from '@/app/context';
 
 type Props={
   mapsKey:string|undefined
   type:string
-  session: SessionInterface,
-  sitterD?:SitterServices
+  // session: SessionInterface,
+  sitterD?:SitterServices,
+  sitterId?:string
 }
-export const SitterForm = ({mapsKey,type,session,sitterD}:Props) => {
+export const SitterForm = ({mapsKey,type,sitterD,sitterId}:Props) => {
+  const {logUser} = useGlobalContext()
+  const session=logUser
   const [submitting, setSubmitting] = useState<boolean>(false);
   const router = useRouter()
   function getRandomInt(min:number, max:number) {
@@ -27,16 +31,17 @@ export const SitterForm = ({mapsKey,type,session,sitterD}:Props) => {
 
   const [form, setForm] = //the form that changes based on what the user has selected in the form
     useState<SitterServicesFormState>({
-          service:sitterD?.service||{home:false,walk:false,drop:false},
-          moneyH:sitterD?.moneyH||0,
-          moneyD:sitterD?.moneyD||0,
-          daysA:sitterD?.daysA||{mon:false,tue:false,wed:false,
-            thu:false,fri:false,sat:false,sun:false},
-          locationM:sitterD?.locationM||"",
-          mapRadius:sitterD?.mapRadius||0,
-          sizePets:sitterD?.sizePets||{small:false,medium:false,big:false,cat:false},
-          review:sitterD?.review||getRandomInt(1,10),
-          rating:sitterD?.rating||getRandomInt(1,5)
+          service:sitterD?.sitter.service||{home:false,walk:false,drop:false},
+          moneyH:sitterD?.sitter.moneyH||0,
+          moneyD:sitterD?.sitter.moneyD||0,
+          daysA:sitterD?.sitter.daysA||{mon:false,tue:false,wed:false,
+          thu:false,fri:false,sat:false,sun:false},
+          locationM:sitterD?.sitter.locationM||"",
+          mapRadius:sitterD?.sitter.mapRadius||0,
+          sizePets:sitterD?.sitter.sizePets||{small:false,medium:false,big:false,cat:false},
+          review:sitterD?.sitter.review||getRandomInt(1,10),
+          rating:sitterD?.sitter.rating||getRandomInt(1,5),
+          createdBy:session?.mongoDB.user.id
     })
     const handleStateChange = (fieldName: keyof SitterServicesFormState, value: string|number|any) => {//set the form state when something is changed
       
@@ -52,17 +57,17 @@ export const SitterForm = ({mapsKey,type,session,sitterD}:Props) => {
     const { token } = await fetchToken()
   try{//check if the user wants to create or edit their profile
     if (type === "create") {
-      await createNewSitter(form, session?.user?.id, token)
+      await createNewSitter(form)
 
       router.push("/")
       router.refresh()
 
   }
   if (type === "edit") {
-    await updateSitter(form, sitterD?.id as string, token)
+    await updateSitter(form, sitterId as string, token)
             
 
-    router.push(`/profile/${session.user.id}`)
+    router.push(`/profile/${session.mongoDB.user.id}`)
     router.refresh()
 
   }

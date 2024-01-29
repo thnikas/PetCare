@@ -7,7 +7,6 @@ import { Fragment, Suspense, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { SessionInterface } from "@/common.types";
 import { UserProfile } from "@/common.types";
-import { getUser } from "@/lib/actions";
 import { useGlobalContext } from "@/app/context";
 
 type Props={
@@ -16,15 +15,17 @@ type Props={
 
 const ProfileMenu = ({ session}: Props) => {//the menu that is showed when the user is logged and the his image
     const [openModal, setOpenModal] = useState(false);
-    const { setLoader} = useGlobalContext();
-
+    const { setLoader, setLogUser} = useGlobalContext();
+    const signOutLocal = ()=>{
+        setLogUser(null)
+    }
     return (
         <div className="flexCenter z-10 flex-col relative">
             <Menu as="div">
                 <Menu.Button className="flexCenter" onMouseEnter={() => setOpenModal(true)} >
-                    {session?.user?.avatarUrl && (
+                    {session?.mongoDB?.user?.avatarUrl && (
                         <Image
-                            src={session.user.avatarUrl}
+                            src={session.mongoDB.user.avatarUrl}
                             width={40}
                             height={40}
                             className="rounded-full w-12 h-12"
@@ -49,22 +50,22 @@ const ProfileMenu = ({ session}: Props) => {//the menu that is showed when the u
                         onMouseLeave={() => setOpenModal(false)}
                     >
                         <div className="flex flex-col items-center gap-y-4">
-                            {session?.user?.image && (
+                            {session?.mongoDB?.user?.avatarUrl && (
                                 <Image
-                                    src={session?.user?.avatarUrl}
+                                    src={session?.mongoDB.user?.avatarUrl}
                                     className="rounded-full w-20 h-20"
                                     width={80}
                                     height={80}
                                     alt="profile Image"
                                 />
                             )}
-                            <p className="font-semibold">{session?.user?.name}</p>
+                            <p className="font-semibold">{session?.mongoDB.user?.name}</p>
                         </div>
 
                         <div className="flex flex-col gap-3 pt-5 items-start w-full">
                         <Menu.Item>
 
-                                <Link href={`/profile/${session?.user?.id}`} className="text-base" >
+                                <Link href={`/profile/${session?.mongoDB.user?.id}`} className="text-base" >
                                 <div className="flex gap-3">
                                 {/**redirect to profile */}
                                 <Image width={25} height={25} src={'/dog_edit.svg'} alt="gear"/>
@@ -75,7 +76,7 @@ const ProfileMenu = ({ session}: Props) => {//the menu that is showed when the u
                             <div className="w-full flexStart border-t border-nav-border ">
                             </div>
                             <Menu.Item>
-                                <Link href={`/edit-profile/${session?.user?.id}`} className="text-base" onClick={()=>setLoader(true)}> 
+                                <Link href={`/edit-profile/${session?.mongoDB?.user?.id}`} className="text-base" onClick={()=>setLoader(true)}> 
                                     <div className="flex gap-3">
                                         <Image width={25} height={25} src={'/gear.svg'} alt="gear"/>
                                         <h2>Profile Settings</h2>
@@ -85,7 +86,7 @@ const ProfileMenu = ({ session}: Props) => {//the menu that is showed when the u
                         </div>
                         <div className="w-full flexStart border-t border-nav-border mt-2 pt-2">
                             <Menu.Item>
-                                <button type="button" className="text-md" onClick={() =>  signOut({callbackUrl: `${window.location.origin}`})}> 
+                                <button type="button" className="text-md" onClick={() =>  signOutLocal()}> 
                                         <div className="flex gap-3"> 
                                             <Image width={25} height={25} src={'/logOut.svg'} alt="gear"/>
                                             <h2>Sign out</h2>

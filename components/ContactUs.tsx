@@ -43,8 +43,8 @@ const ContactUs = () => {
           .then(
             () => {
               setLoading(false);
-               alert("Thank you. The sitter will get back to you as soon as possible.");
-              if (confirm("Go back to the Sitter Profile?")) {
+               alert("Thank you. We will get back to you as soon as possible.");
+              if (confirm("Go back Main Page?")) {
                 // User pressed "OK" in the confirm dialog
                 router.back(); // Navigate back to the previous page
               }

@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-import {  createUserMutation, deleteProjectMutation, updateProjectMutation, getProjectByIdQuery,getPetByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation, sitterQueryN } from "@/graphql";
+import {  createUserMutation, deleteProjectMutation, updateProjectMutation,getPetByIdQuery, getUserQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation, sitterQueryN, getUserByIdQuery } from "@/graphql";
 import { PetForm, PetFormState,SitterServices, SitterServicesForm, UserForm } from "@/common.types";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -42,61 +42,54 @@ const makeGraphQLRequest = async (query: string, variables = {}) => {
   }
 };
 
-export const fetchAllProjects = (category?: string | null, endcursor?: string | null) => {
-  client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(projectsQuery, { category, endcursor });
-};
+
 export const fetchAllPets = (type?: string | null, endcursor?: string | null) => {
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(petsQuery, { type, endcursor });
 };
-export const fetchAllSitters = (locationM?: string | undefined, endcursor?: string | null) => {
+export const fetchAllSitters = (locationM?: string | undefined) => {
   client.setHeader("x-api-key", apiKey);
 
-  return makeGraphQLRequest(sitterQuery, { locationM, endcursor });
+  return makeGraphQLRequest(sitterQuery, { locationM});
 };
 export const fetchAllSittersN = (endcursor?: string | null) => {
   client.setHeader("x-api-key", apiKey);
 
-  return makeGraphQLRequest(sitterQueryN, { endcursor });
+  return makeGraphQLRequest(sitterQueryN);
 };
 export const fetchAllUsers=(id?:string | null, endcursor?: string | null)=>{
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(sitterQuery, { id, endcursor });
 }
-export const createNewPet = async (form: PetForm, creatorId: string, token: string) => {
+export const createNewPet = async (form: PetForm) => {
   const imageUrl = await uploadImage(form.image);
 
   if (imageUrl.url) {
-    client.setHeader("Authorization", `Bearer ${token}`);
+    // client.setHeader("Authorization", `Bearer ${token}`);
 
     const variables = {
       input: { 
         ...form, 
         image: imageUrl.url, 
-         createdBy: { 
-           link: creatorId 
-         }
+        
       }
     };
 
     return makeGraphQLRequest(createPet, variables);
   }
 };
-export const createNewSitter = async (form: SitterServicesForm, creatorId: string, token: string) => {
+export const createNewSitter = async (form: SitterServicesForm) => {
   // const imageUrl = await uploadImage(form.image);
-  
-    client.setHeader("Authorization", `Bearer ${token}`);
+  // console.log(token)
+  //   client.setHeader("Authorization", `Bearer ${token}`);
 
     const variables = {
       input: { 
         ...form, 
          
-         createdBy: { 
-           link: creatorId 
-         }
+         
       }
     };
 
@@ -105,7 +98,7 @@ export const createNewSitter = async (form: SitterServicesForm, creatorId: strin
 };
 
 
-export const updateUser = async (form: UserForm, userId: string, token: string) => {
+export const updateUser = async (form: UserForm, userId: string) => {
   function isBase64DataURL(value: string) {
     const base64Regex = /^data:image\/[a-z]+;base64,/;
     return base64Regex.test(value);
@@ -123,12 +116,15 @@ export const updateUser = async (form: UserForm, userId: string, token: string) 
     }
   }
 
-  client.setHeader("Authorization", `Bearer ${token}`);
-
+  // client.setHeader("Authorization", `Bearer ${token}`);
   const variables = {
     id: userId,
-    input: updatedForm,
+    name:form.name,
+    description:form.description,
+    email:form.email,
+    avatarUrl:updatedForm.avatarUrl
   };
+  
 
   return makeGraphQLRequest(updateUserMutation, variables);
 };
@@ -212,19 +208,16 @@ export const deleteProject = (id: string, token: string) => {
   client.setHeader("Authorization", `Bearer ${token}`);
   return makeGraphQLRequest(deleteProjectMutation, { id });
 };
-export const deleteUser = (id: string, token: string) => {
-  client.setHeader("Authorization", `Bearer ${token}`);
+export const deleteUser = (id: string, ) => {
+  // client.setHeader("Authorization", `Bearer ${token}`);
   return makeGraphQLRequest(deleteUserMutation, { id });
 };
-export const deletePet = (id: string, token: string) => {
-  client.setHeader("Authorization", `Bearer ${token}`);
+export const deletePet = (id: string, ) => {
+  // client.setHeader("Authorization", `Bearer ${token}`);
   return makeGraphQLRequest(deletePetMutation, { id });
 };
 
-export const getProjectDetails = (id: string) => {
-  client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectByIdQuery, { id });
-};
+
 
 export const getPetDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
@@ -235,34 +228,36 @@ export const getSitterDetails = (id: string) => {
   return makeGraphQLRequest(getSitterByIdQuery, { id });
 };
 
-export const createUser = (name: string, email: string, avatarUrl: string) => {
+export const createUser = (form:UserForm) => {
   client.setHeader("x-api-key", apiKey);
 
   const variables = {
     input: {
-      name: name,
-      email: email,
-      avatarUrl: avatarUrl
+      ...form
     },
   };
   
   return makeGraphQLRequest(createUserMutation, variables);
 };
 
-export const getUserProjects = (id: string, last?: number) => {
+
+export const getUserPets = (createdBy: any ) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last });
+  const variables = {
+    createdBy: {"eq":createdBy}
+  }
+  return makeGraphQLRequest(getPetsOfUserQuery, variables);
 };
-export const getUserPets = (id: string, last?: number) => {
+export const getUserSitter = (createdBy: string,) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getPetsOfUserQuery, { id, last });
-};
-export const getUserSitter = (id: string, last?: number) => {
-  client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getSitterOfUserQuery, { id, last });
+  return makeGraphQLRequest(getSitterOfUserQuery, { createdBy });
 };
 
-export const getUser = (email: string) => {
+export const getUserByEmail = (email: string) => {
   client.setHeader("x-api-key", apiKey);
   return makeGraphQLRequest(getUserQuery, { email });
+};
+export const getUserById = (id: string) => {
+  client.setHeader("x-api-key", apiKey);
+  return makeGraphQLRequest(getUserByIdQuery, { id });
 };

@@ -18,9 +18,9 @@ const ButtonSi = ({ title, leftIcon, rightIcon, handleClick, submitting, type, b
     <button 
         type={type || 'button'}
         disabled={submitting || false}
-        className={`flexCenter gap-3 px-4 py-3 bt_col
+        className={` ${customClass} flexCenter gap-3 px-4 py-3 bt_col
         ${textColor ? textColor : 'text-white'} 
-        ${submitting ? 'bg-black/50' : bgColor } sm:h-[2vw] sm:w-[4vw] sm:text-[0.8vw]  rounded-xl  lg:text-[1.2vw] lg:h-[4vw] lg:w-[7vw] font-medium  ${customClass} `}
+        ${submitting ? 'bg-black/50' : bgColor } sm:h-[2vw] sm:w-[4vw] sm:text-[0.8vw]  rounded-xl  lg:text-[1.2vw] lg:h-[4vw] lg:w-[7vw] font-medium  `}
         onClick={handleClick}
     >
         {leftIcon && <Image src={leftIcon} width={14} height={14} alt="left icon" />}

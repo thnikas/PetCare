@@ -7,14 +7,14 @@ import PetForm from "@/components/PetForm";
 //when the user wants to add a pet
 
 const CreatePet = async () => {
-  const session = await getCurrentUser();
+  // const session = await getCurrentUser();
 
-  if (!session?.user) redirect("/")
+  // if (!session?.user) redirect("/")
 
   return (
     <Modal customClass="addPet-wrapper" goBack={true}>
       <h3 className="modal-head-text custom-text-center">Create your Pet profile</h3>
-      <PetForm type="create" session={session} />
+      <PetForm type="create"  />
     </Modal>
   );
 };

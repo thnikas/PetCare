@@ -4,67 +4,24 @@ import { ServicePetSize } from "@/common.types";
 
 export const createPet = `
 	mutation CreatePet($input: PetCreateInput!) {
-		petCreate(input: $input) {
-			pet {
-				 name,
-  type,
-  sex,
-  ageY,
-  ageM,
-  friendly,
-  feeding,
-  energy,
-  else,
-  image,
-  id,
-  createdBy {
-    email
-    name,
-    id,
-            
-            avatarUrl
-  }
-			}
+    mongoDB{
+      petCreate(input: $input) {
+        insertedId
+
      
-		}
+      }
+    }
+		
 	}
 `;
 export const createSitter = `
-	mutation CreateSitter($input: SitterCreateInput!) {
-		sitterCreate(input: $input) {
-			sitter {
-        service{
-          home,
-          walk,
-          drop
-        },
-        moneyH,
-        moneyD,
-        daysA{
-          mon,tue,wed,
-          thu,fri,sat,sun
-        },
-        locationM,
-        mapRadius,
-        sizePets {
-          small
-          medium
-          big
-          cat
-        },
-        review,
-        rating,
-        id
-        createdBy {
-          email,
-          name,
-          id,        
-          avatarUrl
-        }
-			}
-     
-		}
-	}
+mutation CreateSitter($input: SitterCreateInput!) {
+  mongoDB {
+    sitterCreate(input: $input) {
+      insertedId
+    }
+  }
+}
 `;
 export const updateProjectMutation = `
 	mutation UpdateProject($id: ID!, $input: ProjectUpdateInput!) {
@@ -81,84 +38,115 @@ export const updateProjectMutation = `
 		}
 	}
 `;
-export const updateUserMutation=`
-mutation UserUpdate($id:ID!,$input:UserUpdateInput!) {
-  userUpdate(by:{id:$id},input:$input){
-    user{
-      name
-      email
-      avatarUrl
-      description
-      githubUrl
-      linkedinUrl
-      
+export const updateUserMutation = `
+  mutation UserUpdate($id: ID!, $name: String!, $description: String!, $email: String!, $avatarUrl: String!) {
+    mongoDB {
+      userUpdate(by: { id: $id }, input: { name: { set: $name }, description: { set: $description }, email: { set: $email }, avatarUrl: { set: $avatarUrl } }) {
+        modifiedCount
+      }
     }
   }
-}`;
+`;
 //change the structure so that it does not need all the fields
 export const updatePetMutation = `
-	mutation UpdatePet($id: ID!, $name: String!,
-    $else: String!,
-    $image: String!,
-    $sex: String!,
-    $friendly: String!,
-    $feeding: String!,
-    $energy: String!,
-    $type: String!,
-    $ageY: Int!,
-    $ageM: Int!) {
-		petUpdate(by: { id: $id }, input: {name: $name,
-      else: $else,
-      image: $image,
-      sex: $sex,
-      friendly: $friendly,
-      feeding: $feeding,
-      energy: $energy,
-      type: $type, ageY: { set: $ageY },ageM:{set: $ageM}}) {
-			pet {
-				name
-        id
-        
-  createdBy {
-    email
-    name
-   
+mutation UpdatePet(
+  $id: ID!,
+  $name: String!,
+  $else: String!,
+  $image: String!,
+  $sex: String!,
+  $friendly: String!,
+  $feeding: String!,
+  $energy: String!,
+  $type: String!,
+  $ageY: Int!,
+  $ageM: Int!
+) {
+  mongoDB {
+    petUpdate(
+      by: { id: $id },
+      input: {
+        name: { set: $name },
+        else: { set: $else },
+        image: { set: $image },
+        sex: { set: $sex },
+        friendly: { set: $friendly },
+        feeding: { set: $feeding },
+        energy: { set: $energy },
+        type: { set: $type },
+        ageY: { set: $ageY },
+        ageM: { set: $ageM }
+      }
+    ) {
+      modifiedCount
+    }
   }
-			}
-		}
-	}
+}
+
 `;
 
 //how to make custom types validatable
 export const updateSitterMutation = `
-	mutation UpdateSitter($id: ID!, $moneyH:Int!,$moneyD:Int!,$locationM:String!,$home:Boolean!,$walk:Boolean!,$drop:Boolean!,
-  $mapRadius:Int!,$review:Int!,$rating:Int!,$mon:Boolean!,$tue:Boolean!,$wed:Boolean!,$thu:Boolean!,$fri:Boolean!,$sat:Boolean!,$sun:Boolean!,
-  $small:Boolean!,$medium:Boolean!,$big:Boolean!,$cat:Boolean!) {
-		sitterUpdate(by: { id: $id }, input: {service: {
-      home: $home,
-      walk: $walk,
-      drop: $drop,
-    },
-      moneyH: {set:$moneyH},
-      moneyD: {set:$moneyD},
-      daysA: {mon:$mon,tue:$tue,wed:$wed,thu:$thu,fri:$fri,sat:$sat,sun:$sun},
-      locationM: $locationM,
-      mapRadius: {set:$mapRadius},
-      review:{set:$review},
-      rating:{set:$rating},
-      sizePets: {small:$small,medium:$medium,big:$big,cat:$cat,},
-      }) {
-			sitter {
-        id
+mutation UpdateSitter(
+  $id: ID!,
+  $moneyH: Int!,
+  $moneyD: Int!,
+  $locationM: String!,
+  $home: Boolean!,
+  $walk: Boolean!,
+  $drop: Boolean!,
+  $mapRadius: Int!,
+  $review: Int!,
+  $rating: Int!,
+  $mon: Boolean!,
+  $tue: Boolean!,
+  $wed: Boolean!,
+  $thu: Boolean!,
+  $fri: Boolean!,
+  $sat: Boolean!,
+  $sun: Boolean!,
+  $small: Boolean!,
+  $medium: Boolean!,
+  $big: Boolean!,
+  $cat: Boolean!
+) {
+  mongoDB {
+    sitterUpdate(
+      by: { id: $id },
+      input: {
+        service: {
+          home: { set: $home },
+          walk: { set: $walk },
+          drop: { set: $drop },
+        },
+        moneyH: { set: $moneyH },
+        moneyD: { set: $moneyD },
+        daysA: {
+          mon: { set: $mon },
+          tue: { set: $tue },
+          wed: { set: $wed },
+          thu: { set: $thu },
+          fri: { set: $fri },
+          sat: { set: $sat },
+          sun: { set: $sun },
+        },
+        locationM: { set: $locationM },
+        mapRadius: { set: $mapRadius },
+        review: { set: $review },
+        rating: { set: $rating },
+        sizePets: {
+          small: { set: $small },
+          medium: { set: $medium },
+          big: { set: $big },
+          cat: { set: $cat },
+        },
         
-  createdBy {
-    email
-    name
-   id
+      }
+    ) {
+      modifiedCount
+    }
   }
-			}
-		}
-	}
+}
 `;
 
 export const deleteProjectMutation = `
@@ -171,16 +159,22 @@ export const deleteProjectMutation = `
 
 export const deletePetMutation = `
   mutation PetDelete($id: ID!) {
-    petDelete(by: { id: $id }) {
-      deletedId
+    mongoDB{
+      petDelete(by: { id: $id }) {
+        deletedCount
+      }
     }
+    
   }
 `;
 export const deleteUserMutation = `
   mutation UserDelete($id: ID!) {
-    userDelete(by: { id: $id }) {
-      deletedId
+    mongDB{
+      userDelete(by: { id: $id }) {
+        deletedCount
+      }
     }
+    
   }
 `;
 export const deleteSitterMutation = `
@@ -192,49 +186,17 @@ export const deleteSitterMutation = `
 `;
 export const createUserMutation = `
 	mutation CreateUser($input: UserCreateInput!) {
-		userCreate(input: $input) {
-			user {
-				name
-				email
-				avatarUrl
-				description
-				githubUrl
-				linkedinUrl
-				id
-			}
-		}
+    mongoDB{
+      userCreate(input: $input)  {
+        insertedId
+      }
+    }
+		
+		
 	}
 `;
 
-export const projectsQuery = `
-  query getProjects($category: String, $endcursor: String) {
-    projectSearch(first: 8, after: $endcursor, filter: {category: {eq: $category}}) {
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
-      edges {
-        node {
-          title
-          githubUrl
-          description
-          liveSiteUrl
-          id
-          image
-          category
-          createdBy {
-            id
-            email
-            name
-            avatarUrl
-          }
-        }
-      }
-    }
-  }
-`;
+
 export const petsQuery = `
   query getPets($type: String, $endcursor: String) {
     petSearch(first: 8, after: $endcursor, filter: {type: {eq: $type}}) {
@@ -268,18 +230,14 @@ export const petsQuery = `
     }
   }
 `;
+
 export const sitterQuery = `
-  query getSitter($locationM: String, $endcursor: String) {
-    sitterSearch(first: 8, after: $endcursor, filter: {locationM: {eq: $locationM}}) {
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
+query getSitter($locationM: String) {
+  mongoDB{
+    sitterCollection( filter: {locationM: {eq: $locationM}}, first:10) {
       edges {
         node {
-          service{
+          service {
             home,
             walk,
             drop
@@ -288,9 +246,9 @@ export const sitterQuery = `
           moneyD,
           rating,
           review,
-          daysA{
-            mon,tue,wed,
-            thu,fri,sat,sun
+          daysA {
+            mon, tue, wed,
+            thu, fri, sat, sun
           },
           locationM,
           mapRadius,
@@ -300,20 +258,15 @@ export const sitterQuery = `
             big
             cat
           },
-          id
-          createdBy {
-            email,
-            name,
-            id,        
-            avatarUrl,
-            description
-          }
+          id,
+          createdBy
         }
       }
     }
   }
+}
 `;
-export const sitterQueryN = `
+export const sitterQueryN2 = `
   query getSitter($endcursor: String) {
     sitterSearch(first: 8, after: $endcursor) {
       pageInfo {
@@ -363,134 +316,52 @@ export const sitterQueryN = `
     }
   }
 `;
-export const getProjectByIdQuery = `
-  query GetProjectById($id: ID!) {
-    project(by: { id: $id }) {
-      id
-      title
-      description
-      image
-      liveSiteUrl
-      githubUrl
-      category
-      createdBy {
-        id
-        name
-        email
-        avatarUrl
-      }
-    }
-  }
-`;
-export const getPetByIdQuery = `
-  query GetPetById($id: ID!) {
-    pet(by: { id: $id }) {
-      name,
-          type,
-          sex,
-          ageY,
-          ageM,
-          friendly,
-          feeding,
-          energy,
-          else,
-          image,
-          id,
-          createdBy {
-            id
-            email
-            name
-            avatarUrl
+export const sitterQueryN=`
+query getSitter() {
+  mongoDB{
+    sitterCollection(first:20){
+      edges{
+        node{
+          service {
+            home
+            walk
+            drop
           }
-    }
-  }
-`;
-export const getSitterByIdQuery = `
-  query GetSitterById($id: ID!) {
-    sitter(by: { id: $id }) {
-      service{
-        home,
-        walk,
-        drop
-      },
-      moneyH,
-      moneyD,
-      daysA{
-        mon,tue,wed,
-        thu,fri,sat,sun
-      },
-      locationM,
-      mapRadius,
-      review,
-      rating,
-      sizePets {
-        small
-        medium
-        big
-        cat
-      },
-      id
-      createdBy {
-        email,
-        name,
-        id,        
-        avatarUrl,
-        description
-      }
-    }
-  }
-`;
-
-export const getUserQuery = `
-  query GetUser($email: String!) {
-    user(by: { email: $email }) {
-      id
-      name
-      email
-      avatarUrl
-      description
-      githubUrl
-      linkedinUrl
-    }
-  }
-`;
-      
-export const getProjectsOfUserQuery = `
-  query getUserProjects($id: ID!, $last: Int = 4) {
-    user(by: { id: $id }) {
-      id
-      name
-      email
-      description
-      avatarUrl
-      githubUrl
-      linkedinUrl
-      projects(last: $last) {
-        edges {
-          node {
-            id
-            title
-            image
+          moneyH
+          moneyD
+          rating
+          review
+          daysA {
+            mon
+            tue
+            wed
+            thu
+            fri
+            sat
+            sun
           }
+          locationM
+          mapRadius
+          sizePets {
+            small
+            medium
+            big
+            cat
+          }
+          id
+          createdBy
         }
       }
     }
   }
-`;
-export const getPetsOfUserQuery = `
-  query getUserPets($id: ID!, $last: Int = 4) {
-    user(by: { id: $id }) {
-      id
-      name
-      email
-      description
-      avatarUrl
-      githubUrl
-      linkedinUrl
-      pets(last: $last) {
-        edges {
-          node {
-            name,
+}
+`
+
+export const getPetByIdQuery = `
+  query GetPetById($id: ID!) {
+    mongoDB{
+      pet(by: { id: $id }) {
+        name,
             type,
             sex,
             ageY,
@@ -501,57 +372,134 @@ export const getPetsOfUserQuery = `
             else,
             image,
             id,
-          }
-        }
+            createdBy 
       }
     }
+   
   }
 `;
-export const getSitterOfUserQuery = `
-  query getUserSitter($id: ID!, $last: Int = 4) {
+export const getSitterByIdQuery = `
+  query GetSitterById($id: ID!) {
+    mongoDB {
+      sitter(by: { id: $id }) {
+        service{
+          home,
+          walk,
+          drop
+        },
+        moneyH,
+        moneyD,
+        daysA{
+          mon,tue,wed,
+          thu,fri,sat,sun
+        },
+        locationM,
+        mapRadius,
+        review,
+        rating,
+        sizePets {
+          small
+          medium
+          big
+          cat
+        },
+        id
+        createdBy
+      }
+    }
+    
+  }
+`;
+
+
+export const getUserQuery = `
+query GetUserByEmail($email: String!) {
+  mongoDB {
+    user(by: { email: $email }) {
+      id
+      name
+      email
+      avatarUrl
+      description
+      passwordHash
+    }
+  }
+}
+
+`;
+   
+export const getUserByIdQuery =`
+query GetUserByEmail($id: ID!) {
+  mongoDB {
     user(by: { id: $id }) {
       id
       name
       email
-      description
       avatarUrl
-      githubUrl
-      linkedinUrl
-      sitter(last: $last) {
-        edges {
-          node {
-            service{
-              home,
-              walk,
-              drop
-            },
-            moneyH,
-            moneyD,
-            daysA{
-              mon,tue,wed,
-              thu,fri,sat,sun
-            },
-            locationM,
-            mapRadius,
-            review,
-            rating,
-            sizePets {
-              small
-              medium
-              big
-              cat
-            }
-            id
-            createdBy {
-              email,
-              name,
-              id,        
-              avatarUrl,
-              description
-            }
-          }
+      description
+      passwordHash
+    }
+  }
+}`
+
+export const getPetsOfUserQuery = `
+query getUserPets($createdBy: MongoDBStringSearchFilterInput) {
+  mongoDB {
+    petCollection(filter: { createdBy: $createdBy }, first: 10) {
+      edges {
+        node {
+          name
+          type
+          sex
+          ageY
+          ageM
+          friendly
+          feeding
+          energy
+          else
+          image
+          createdBy
+          id
         }
       }
     }
   }
+}
 `;
+export const getSitterOfUserQuery = `
+  query GetSitter( $createdBy: String!) {
+    mongoDB{
+      sitter(by: { createdBy: $createdBy }) {
+        id,
+        service{
+          home,
+          walk,
+          drop
+        },
+        moneyH,
+        moneyD,
+        daysA{
+          mon,tue,wed,
+          thu,fri,sat,sun
+        },
+        locationM,
+        mapRadius,
+        sizePets {
+          small
+          medium
+          big
+          cat
+        },
+        review,
+        rating,
+        createdBy,
+        
+      }
+       
+    }
+   
+  }
+`;
+
+
+

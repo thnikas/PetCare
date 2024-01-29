@@ -4,9 +4,8 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 import Button from './Button';
 
-const PetCareDetails = () => {//the com is showed under the background in home page
+const PetCareDetails = async() => {//the com is showed under the background in home page
   const router = useRouter();
-
   return (
     <div >
       <div className='justify-center flex w-[88vw] pt-24 '>

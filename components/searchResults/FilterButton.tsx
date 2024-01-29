@@ -12,8 +12,8 @@ type Props={
 const FilterButton = ({title,filtersState,sitterData,setSitterData}:Props) => {
     let array:any=[]
     const setFilters =()=>{//executes when the user press the button
-
     const filteredSitters = sitterData.filter((person:any) => {//changes array based on the selected filters then this changed array goes to the next function and changes based on the next filter
+      console.log(person)
       for (const key in person.node.service) {
         if (
           filtersState.service.hasOwnProperty(key) &&

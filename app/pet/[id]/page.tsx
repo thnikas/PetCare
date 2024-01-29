@@ -2,23 +2,23 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { getCurrentUser } from "@/lib/session"
-import { getPetDetails } from "@/lib/actions"
+import { getPetDetails, getUserById } from "@/lib/actions"
 import Modal from "@/components/Modal"
 import RelatedProjects from "@/components/RelatedProjects"
 import { ProjectInterface,PetInterface } from "@/common.types"
 import PetActions from "@/components/PetActions"
 
 const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the page showed when the user clicks the eye in the petCard
-    const session = await getCurrentUser()
-    const result=await getPetDetails(id) as {pet?:PetInterface}
-
-    if (!result?.pet) return (
+    // const session = await getCurrentUser()
+    const result=await getPetDetails(id) as {mongoDB?:PetInterface}
+    const user= await getUserById(result?.mongoDB?.pet.createdBy)
+    if (!result?.mongoDB?.pet) return (
         <p className="no-result-text">Failed to fetch project info</p>
     )
 
-    const petDetails = result?.pet
+    const petDetails = result?.mongoDB.pet
 
-    const renderLink = () => `/profile/${petDetails?.createdBy?.id}`
+    const renderLink = () => `/profile/${petDetails?.createdBy}`
     return (
         <Modal customData={petDetails?.createdBy?.id}>
             <section typeof="Show" className="flexBetween gap-y-8 max-w-4xl max-xs:flex-col w-full">
@@ -33,11 +33,11 @@ const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the pag
                     </div>
                 </div>
 
-                {session?.user?.email === petDetails?.createdBy?.email && (
+                
                     <div className="flex justify-end items-center gap-2">
                         <PetActions petId={petDetails?.id} />
                     </div>
-                )}
+                
             </section>
 
             <section className="mt-14">
@@ -120,7 +120,7 @@ const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the pag
                 <span className="w-full h-0.5 bg-light-white-200" />
                 <Link href={renderLink()} className="min-w-[100px] h-[100px]">
                     <Image
-                        src={petDetails?.createdBy?.avatarUrl}
+                        src={user.mongoDB.user.avatarUrl}
                         className="rounded-full"
                         width={100}
                         height={100}
@@ -130,7 +130,7 @@ const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the pag
                 <span className="w-full h-0.5 bg-light-white-200" />
             </section>
 
-            <RelatedProjects userId={petDetails?.createdBy?.id} projectId={petDetails?.id} />
+            {/* <RelatedProjects userId={petDetails?.createdBy} projectId={petDetails?.id} /> */}
         </Modal>
     )
 }

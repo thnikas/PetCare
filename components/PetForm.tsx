@@ -11,14 +11,18 @@ import {  fetchToken,createNewPet, updatePet,  } from '@/lib/actions';
 import { FormState, PetFormState, PetInterface, ProjectInterface, SessionInterface } from '@/common.types';
 import PilPicker from './PilPicker';
 import { Friendly } from '@/constants';
+import { useGlobalContext } from '@/app/context';
 type Props = {
     type: string,
-    session: SessionInterface,
+    // session: SessionInterface,
     project?: ProjectInterface,
     petCr?:PetInterface
 }
 
-const PetForm = ({ type, session, petCr }: Props) => {//the form that the user can create or edit the Pet
+const PetForm = ({ type,  petCr }: Props) => {//the form that the user can create or edit the Pet
+    console.log(petCr)
+    const {logUser} = useGlobalContext()
+    const session=logUser
     const router = useRouter()
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [form, setForm] = useState<PetFormState>({
@@ -32,6 +36,7 @@ const PetForm = ({ type, session, petCr }: Props) => {//the form that the user c
         feeding: petCr?.feeding || "",
         energy:petCr?.energy || "",
         type:petCr?.type||"Dog",
+        createdBy:session?.mongoDB.user.id
     })
     const handleStateChange = (fieldName: keyof PetFormState, value: string|number) => {//the form update when a value is changed
         setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
@@ -70,7 +75,7 @@ const PetForm = ({ type, session, petCr }: Props) => {//the form that the user c
 
         try {
             if (type === "create") {
-                await createNewPet(form, session?.user?.id, token)
+                await createNewPet(form)
 
                 router.push("/")
                 router.refresh()
@@ -80,7 +85,7 @@ const PetForm = ({ type, session, petCr }: Props) => {//the form that the user c
             if (type === "edit") {
                
                  await updatePet(form, petCr?.id as string, token)
-                router.push(`/profile/${session.user.id}`)
+                router.push(`/profile/${session.mongoDB.user.id}`)
                 router.refresh()
 
             }
