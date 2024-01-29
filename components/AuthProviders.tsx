@@ -34,15 +34,15 @@ const AuthProviders = () => {//is a button that is showed when the user in not l
 
         // fetchProviders();
     }, []);
-    const signInLocal = async() => {
-        const logUser = await getUserByEmail('8nikas@gmail.com')
-        setLogUser(logUser)
-    }
+    // const signInLocal = async() => {
+    //     const logUser = await getUserByEmail('8nikas@gmail.com')
+    //     setLogUser(logUser)
+    // }
     
         return (
             <Link href={'/log-in'}>
                 
-                    <ButtonSi  title='Sign In' handleClick={() => signInLocal()} />
+                    <ButtonSi  title='Sign In'  />
                 
             </Link>
         )
