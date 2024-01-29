@@ -129,12 +129,7 @@ export interface PetInterface {
   else:string;
   image: string;
   id: string;
-  createdBy: {
-    name: string;
-    email: string;
-    avatarUrl: string;
-    id: string;
-  };
+  createdBy:string;
 }
 
 export interface UserProfile {

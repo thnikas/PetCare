@@ -31,10 +31,11 @@ const SitterShow = ({id,apikey}:Props) => {
         top?: string;
       };
     const getUser=async()=>{
-       const finalSitter=await getSitterDetails(id) as{sitter:SitterServices}//check if the user is sitter
-        const sitter=await getUserById(finalSitter.mongoDB.sitter.createdBy) as { user: UserProfile }
+       const finalSitter=await getSitterDetails(id) as{mongoDB:SitterServices}//check if the user is sitter
+        const sitter=await getUserById(finalSitter.mongoDB.sitter.createdBy) as { mongoDB:{user:UserProfile}  }
         console.log(sitter)
-        setSitterUser(finalSitter.mongoDB.sitter)
+        //@ts-ignore
+        setSitterUser(finalSitter?.mongoDB?.sitter)
         setLocationM(finalSitter.mongoDB.sitter.locationM)
         setImg(sitter.mongoDB.user.avatarUrl)
         setName(sitter.mongoDB.user.name)

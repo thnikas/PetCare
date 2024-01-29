@@ -23,21 +23,7 @@ mutation CreateSitter($input: SitterCreateInput!) {
   }
 }
 `;
-export const updateProjectMutation = `
-	mutation UpdateProject($id: ID!, $input: ProjectUpdateInput!) {
-		projectUpdate(by: { id: $id }, input: $input) {
-			project {
-				id
-				title
-				description
-				createdBy {
-					email
-					name
-				}
-			}
-		}
-	}
-`;
+
 export const updateUserMutation = `
   mutation UserUpdate($id: ID!, $name: String!, $description: String!, $email: String!, $avatarUrl: String!) {
     mongoDB {
@@ -149,13 +135,7 @@ mutation UpdateSitter(
 }
 `;
 
-export const deleteProjectMutation = `
-  mutation DeleteProject($id: ID!) {
-    projectDelete(by: { id: $id }) {
-      deletedId
-    }
-  }
-`;
+
 
 export const deletePetMutation = `
   mutation PetDelete($id: ID!) {

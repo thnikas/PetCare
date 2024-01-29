@@ -1,9 +1,7 @@
 
 'use client'
-import { getCurrentUser } from "@/lib/session";
 
 
-import { getUser } from "@/lib/actions";
 import { UserProfile } from "@/common.types";
 import NavBarL from "./NavBarL";
 import { useContext } from "react";

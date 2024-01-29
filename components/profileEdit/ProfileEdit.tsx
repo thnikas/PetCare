@@ -23,6 +23,7 @@ const ProfileEdit = ({userD}:Props) => {//when the user is logged in and want to
         email: user?.email,
         avatarUrl:user?.avatarUrl,
         description:user?.description,
+        passwordHash:user?.passwordHash
     })
     const handleStateChange = (fieldName: keyof UserForm, value: string) => {//when something changes in the form
         setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));

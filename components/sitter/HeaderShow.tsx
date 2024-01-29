@@ -9,13 +9,14 @@ type Props={
     img?:string,
     locationM:string|null,
     firstRender:boolean|undefined,
-    sitter:SitterServices|undefined,
+    sitter:any, //change
     session:SessionInterface;
 
 }
 
 const HeaderShow = ({name,img,locationM,firstRender,sitter,session}:Props) => {//the header com in the sitter profile page
   const [showSkeleton, setShowSkeleton] = useState(true);
+  console.log(sitter)
   useEffect(() => {
     if(firstRender==true){
       const timer = setTimeout(() => {

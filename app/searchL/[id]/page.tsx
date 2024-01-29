@@ -11,15 +11,17 @@ type SearchParams = {
     endcursor?: string | null;
   }
   type SitterSearch = {
-    sitterSearch: {
-      edges: { node: SitterServices }[];
-      pageInfo: {
-        hasPreviousPage: boolean;
-        hasNextPage: boolean;
-        startCursor: string;
-        endCursor: string;
-      };
-    },
+    mongoDB:{
+      sitterCollection: {
+        edges: { node: SitterServices }[];
+        pageInfo: {
+          hasPreviousPage: boolean;
+          hasNextPage: boolean;
+          startCursor: string;
+          endCursor: string;
+        };
+      },
+    }
   }
   type Props = {
     searchParams: SearchParams

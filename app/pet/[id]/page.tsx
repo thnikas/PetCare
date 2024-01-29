@@ -4,14 +4,13 @@ import Link from "next/link"
 import { getCurrentUser } from "@/lib/session"
 import { getPetDetails, getUserById } from "@/lib/actions"
 import Modal from "@/components/Modal"
-import RelatedProjects from "@/components/RelatedProjects"
-import { ProjectInterface,PetInterface } from "@/common.types"
+import { ProjectInterface,PetInterface, UserForm } from "@/common.types"
 import PetActions from "@/components/PetActions"
 
 const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the page showed when the user clicks the eye in the petCard
     // const session = await getCurrentUser()
-    const result=await getPetDetails(id) as {mongoDB?:PetInterface}
-    const user= await getUserById(result?.mongoDB?.pet.createdBy)
+    const result=await getPetDetails(id) as {mongoDB:{pet:PetInterface}}
+    const user= await getUserById(result.mongoDB.pet.createdBy) as {mongoDB:{user:UserForm}}
     if (!result?.mongoDB?.pet) return (
         <p className="no-result-text">Failed to fetch project info</p>
     )
@@ -20,7 +19,7 @@ const Pet = async ({ params: { id } }: { params: { id: string } }) => {//the pag
 
     const renderLink = () => `/profile/${petDetails?.createdBy}`
     return (
-        <Modal customData={petDetails?.createdBy?.id}>
+        <Modal customData={petDetails?.createdBy}>
             <section typeof="Show" className="flexBetween gap-y-8 max-w-4xl max-xs:flex-col w-full">
                 <div className="flex-1 flex items-start gap-5 w-full max-xs:flex-col">
                     

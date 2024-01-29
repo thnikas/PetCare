@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-import {  createUserMutation, deleteProjectMutation, updateProjectMutation,getPetByIdQuery, getUserQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation, sitterQueryN, getUserByIdQuery } from "@/graphql";
+import {  createUserMutation,getPetByIdQuery, getUserQuery, createPet, petsQuery,updatePetMutation, deletePetMutation, createSitter, sitterQuery, getSitterByIdQuery, getPetsOfUserQuery, getSitterOfUserQuery, updateSitterMutation, updateUserMutation, deleteUserMutation, sitterQueryN, getUserByIdQuery } from "@/graphql";
 import { PetForm, PetFormState,SitterServices, SitterServicesForm, UserForm } from "@/common.types";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -204,10 +204,7 @@ export const updateSitter = async (form: SitterServicesForm, sitterId: string, t
 
   return makeGraphQLRequest(updateSitterMutation, variables);
 };
-export const deleteProject = (id: string, token: string) => {
-  client.setHeader("Authorization", `Bearer ${token}`);
-  return makeGraphQLRequest(deleteProjectMutation, { id });
-};
+
 export const deleteUser = (id: string, ) => {
   // client.setHeader("Authorization", `Bearer ${token}`);
   return makeGraphQLRequest(deleteUserMutation, { id });

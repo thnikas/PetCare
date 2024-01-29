@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useGlobalContext } from '@/app/context';
 
 type Props={
-  data:SitterServices,
+  data:any,
   sitterData:any
 }
 const List = ({data,sitterData}:Props) => {//list of the user cards that is showed based on the search criteria
@@ -27,7 +27,7 @@ const List = ({data,sitterData}:Props) => {//list of the user cards that is show
   }
 
   const getUser=async()=>{
-  const sitter=await getUserById(data.createdBy) as { user: UserProfile }
+  const sitter=await getUserById(data.createdBy) as { mongoDB: {user:UserProfile} }
   setImg(sitter.mongoDB.user.avatarUrl)
   setName(sitter.mongoDB.user.name)
   setDesc(sitter.mongoDB.user.description)

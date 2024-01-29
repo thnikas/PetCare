@@ -66,22 +66,6 @@ const User = mongodb.model('User', {
   // sitter:g.relation(()=>Sitter).list().optional()
 }).collection('Users')
 
-// const Project = mongodb.model('Project', {
-//   title: g.string().length({ min: 3 }),
-//   description: g.string(), 
-//   image: g.url(),
-//   liveSiteUrl: g.url(), 
-//   githubUrl: g.url(), 
-// // @ts-ignore
-
-//   category: g.string().search(),
-// // @ts-ignore
-
-//   createdBy: g.relation(() => User),
-// }).auth((rules) => {
-//   rules.public().read()
-//   rules.private().create().delete().update()
-// })
 
 const Pet = mongodb.model('Pet', {
   name: g.string().length({ min: 3 }),

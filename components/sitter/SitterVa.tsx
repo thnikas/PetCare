@@ -7,7 +7,7 @@ import { DayCalendarSkeleton } from '@mui/x-date-pickers'
 
 type Props={
    
-    sitter:SitterServices|undefined,
+    sitter:any, //change
     name:string|undefined
   }
 

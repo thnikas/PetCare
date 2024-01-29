@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import Geocode from "react-geocode";
 type Props={
    
-    sitter:SitterServices|undefined,
+    sitter:any,
     name:string|undefined,
     apikey:string|undefined
 

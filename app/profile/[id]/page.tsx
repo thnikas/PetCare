@@ -1,8 +1,7 @@
-import { getUserProjects, getUserPets, getUserSitter, getPetDetails, getSitterDetails,  getUserById } from '@/lib/actions'
+import {  getUserPets, getUserSitter,  getUserById } from '@/lib/actions'
 import ProfilePage from '@/components/ProfilePage'
 import { SitterServices, UserProfile } from '@/common.types';
-import { PetInterface } from '@/common.types';
-import { User } from 'next-auth';
+
 type Props = {
     params: {
         id: string,

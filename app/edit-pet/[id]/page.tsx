@@ -11,7 +11,7 @@ const EditPet = async ({params:{id}}:{params:{id:string}}) => {//edit already cr
   // const session = logUser;
 
   // if (!session?.user) redirect("/")
-  const result=await getPetDetails(id) as {mongoDB?:PetInterface}//get the specific pet that is selected
+  const result=await getPetDetails(id) as {mongoDB?:{pet:PetInterface}}//get the specific pet that is selected
   return (
     <Modal  goBack={true}>
       <h3 className="modal-head-text">Edit Pet</h3>

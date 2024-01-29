@@ -19,21 +19,15 @@ import { getUserByEmail } from '@/lib/actions';
 import { useGlobalContext } from '@/app/context';
 import { useRouter } from 'next/navigation';
 
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+type userExist = {
+  mongoDB:{
+    user:UserForm
+  }
+}
 
 export default function Login() {
   const {setLogUser} = useGlobalContext()
@@ -48,10 +42,8 @@ export default function Login() {
       alert(`Please enter a password!`);
       return
     }
-    const userExist = await getUserByEmail(form.email)
-    console.log(userExist)
+    const userExist = await getUserByEmail(form.email) as userExist
     if(userExist?.mongoDB.user!==null){
-      console.log(userExist?.mongoDB.passwordHash)
       if(userExist?.mongoDB.user.passwordHash==form.passwordHash){
         setLogUser(userExist)
         router.push("/")
