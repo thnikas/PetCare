@@ -1,0 +1,114 @@
+extend schema
+  @auth(
+    providers: [
+      { type: jwt, issuer: "grafbase", secret: "Gs//+do6loahqwrg1lDVuw6Ip38CGgnVn1gsLGJ0QaI=" }
+    ]
+    rules: [
+      { allow: public }
+    ]
+  )extend schema
+  @mongodb(
+    namespace: true
+    name: "MongoDB"
+    url: "https://eu-central-1.aws.data.mongodb-api.com/app/data-ygmmm/endpoint/data/v1"
+    apiKey: "h9DVZesTXhkR4qRqQ6lKjumFrweZmmmzl2XLxHXeWen0kXxastz8wcWQJRCgh9Pg"
+    dataSource: "Cluster0"
+    database: "Demo"
+  )
+
+input DaysIn {
+  mon: Boolean!
+  tue: Boolean!
+  wed: Boolean!
+  thu: Boolean!
+  fri: Boolean!
+  sat: Boolean!
+  sun: Boolean!
+}
+
+type Service {
+  home: Boolean!
+  walk: Boolean!
+  drop: Boolean!
+}
+
+type Days {
+  mon: Boolean!
+  tue: Boolean!
+  wed: Boolean!
+  thu: Boolean!
+  fri: Boolean!
+  sat: Boolean!
+  sun: Boolean!
+}
+
+type SizePets {
+  small: Boolean!
+  medium: Boolean!
+  big: Boolean!
+  cat: Boolean!
+}
+
+type User @model(connector: "MongoDB", collection: "User") {
+  name: String! @length(min: 2, max: 100)
+  email: String! @unique
+  avatarUrl: URL!
+  description: String @length(min: 2, max: 1000)
+  githubUrl: URL
+  linkedinUrl: URL
+  projects: [Project!]
+  pets: [Pet!]
+  sitter: [Sitter!]
+}
+
+type Project @model(connector: "MongoDB", collection: "Project") @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [create, delete, update] }
+    ]) {
+  title: String! @length(min: 3)
+  description: String!
+  image: URL!
+  liveSiteUrl: URL!
+  githubUrl: URL!
+  category: String! @search
+  createdBy: User!
+}
+
+type Pet @model(connector: "MongoDB", collection: "Pet") @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [create, delete, update] }
+    ]) {
+  name: String! @length(min: 3)
+  type: String! @search
+  sex: String!
+  ageY: Int
+  ageM: Int
+  friendly: String!
+  feeding: String!
+  energy: String!
+  else: String!
+  image: String!
+  createdBy: String! 
+}
+
+
+
+type Sitter @model(connector: "MongoDB", collection: "Sitter") @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [create, delete, update] }
+    ]) {
+  service: Service!
+  moneyH: Int!
+  moneyD: Int!
+  daysA: Days!
+  locationM: String! @search
+  mapRadius: Int!
+  sizePets: SizePets!
+  review: Int!
+  rating: Int!
+  createdBy: String!
+}
+
