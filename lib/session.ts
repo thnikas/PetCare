@@ -1,20 +1,20 @@
-// import { getServerSession } from "next-auth/next";
-// import { NextAuthOptions, User } from "next-auth";
-// import { AdapterUser } from "next-auth/adapters";
-// import GoogleProvider from "next-auth/providers/google";
-// import jsonwebtoken from 'jsonwebtoken'
-// import { JWT } from "next-auth/jwt";
-// import {compare,hash} from 'bcrypt'
+import { getServerSession } from "next-auth/next";
+import { NextAuthOptions, User } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
+import GoogleProvider from "next-auth/providers/google";
+import jsonwebtoken from 'jsonwebtoken'
+import { JWT } from "next-auth/jwt";
+import {compare,hash} from 'bcrypt'
 
-// import { createUser,  } from "./actions";
-// import { SessionInterface, UserProfile } from "@/common.types";
-// import { GraphQLClient } from "graphql-request";
-// import Credentials from "next-auth/providers/credentials";
-// const grafbase = new GraphQLClient(process.env.GRAFBASE_API_URL as string, {
-//   headers: {
-//     'x-api-key': process.env.GRAFBASE_API_KEY as string,
-//   },
-// })
+import { createUser,  } from "./actions";
+import { SessionInterface, UserProfile } from "@/common.types";
+import { GraphQLClient } from "graphql-request";
+import Credentials from "next-auth/providers/credentials";
+const grafbase = new GraphQLClient(process.env.GRAFBASE_API_URL as string, {
+  headers: {
+    'x-api-key': process.env.GRAFBASE_API_KEY as string,
+  },
+})
 // export const authOptions: NextAuthOptions = {//get the logged in user
 //   providers: [
 //     Credentials({
@@ -124,8 +124,8 @@
 //   // },
 // };
 
-// export async function getCurrentUser() {
-//   const session = await getServerSession(authOptions) as SessionInterface;
+export async function getCurrentUser() {
+  // const session = await getServerSession(authOptions) as SessionInterface;
 
-//   return session;
-// }
+  // return session;
+}
